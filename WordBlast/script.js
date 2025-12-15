@@ -71,10 +71,10 @@ function spawnEnemy() {
 function gameOver() {
     isGameOver = true;
     finalScoreElement.innerText = score;
-    if (score > bestScore) {
-        bestScore = score;
-        localStorage.setItem("bestScore", bestScore);
-        bestScoreElement.innerText = bestScore;
+    if (score>best) {
+        best=score;
+        localStorage.setItem("best-score",best);
+        bestscoreelement.innerText=best;
     }
     gameOverScreen.classList.remove('hidden');
 }
