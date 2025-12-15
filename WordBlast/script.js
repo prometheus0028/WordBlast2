@@ -2,6 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const finalScoreElement = document.getElementById('final-score');
+const bestscoreelement=document.getElementById('best-score');
 const gameOverScreen = document.getElementById('game-over');
 
 
@@ -13,6 +14,9 @@ let score = 0;
 let isGameOver = false;
 let spawnRate = 2000; 
 let lastSpawnTime = 0;
+let best=localStorage.getItem("best-score");
+best=best?parseInt(best):0;
+bestscoreelement.innerText=best;
 
 
 const wordList = [
@@ -31,7 +35,7 @@ const wordList = [
     "middleware", "architecture", "optimization",
     "recursion", "backtracking", "memoization",
     "normalization", "denormalization",
-    "dependency", "immutability", "responsiveness",
+    "dependency", "immutability", "responsiveness"
 ];
 
 
@@ -67,6 +71,11 @@ function spawnEnemy() {
 function gameOver() {
     isGameOver = true;
     finalScoreElement.innerText = score;
+    if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem("bestScore", bestScore);
+        bestScoreElement.innerText = bestScore;
+    }
     gameOverScreen.classList.remove('hidden');
 }
 
