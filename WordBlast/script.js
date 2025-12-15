@@ -13,25 +13,16 @@ let score = 0;
 let isGameOver = false;
 let spawnRate = 2000; 
 let lastSpawnTime = 0;
+let level=1;
+let levelup=false;
+let a=0;
 
 
 const wordList = [
     "code", "bug", "fix", "git", "push", "pull", "merge", 
     "java", "node", "html", "css", "react", "vue", "data",
     "loop", "if", "else", "var", "let", "const", "array",
-    "function", "object", "class", "method", "scope", "return",
-    "string", "number", "boolean", "switch", "event", "listener",
-    "react", "vue", "script", "style", "json", "api", "promise",
-    "commit", "merge", "branch", "clone", "debug",
-     "asynchronous", "synchronous", "polymorphism", "encapsulation",
-    "inheritance", "abstraction", "multithreading", "concurrency",
-    "serialization", "deserialization", "authentication",
-    "authorization", "cryptography", "virtualization",
-    "microservices", "containerization", "orchestration",
-    "middleware", "architecture", "optimization",
-    "recursion", "backtracking", "memoization",
-    "normalization", "denormalization",
-    "dependency", "immutability", "responsiveness",
+    
 ];
 
 
@@ -53,7 +44,7 @@ class Enemy {
     }
 
     update() {
-        this.y += this.speed;
+        this.y += this.speed+level*0.6;
     }
 }
 
@@ -84,11 +75,31 @@ window.addEventListener('keydown', (e) => {
                 enemies.splice(i, 1);
                 score += 10;
                 scoreElement.innerText = score;
+                if (score % 100===0){
+                    level++;
+                    levelup=true;
+                    a=1;
+                }
             }
             break;
         }
     }
 });
+
+function drawlevelup(){
+    if (!levelup) return;
+    ctx.save();
+    ctx.globalAlpha=a;
+    ctx.font='48px Arial Black';
+    ctx.fillStyle='#FFD700';
+    ctx.textAlign='center';
+    ctx.fillText(`LEVEL ${level}!`,canvas.width/2,canvas.height/2);
+    ctx.restore();
+    a-=0.02;
+    if (a<=0) {
+        levelup=false;
+    }
+}
 
 function gameLoop(timestamp) {
     if (isGameOver) return;
@@ -113,7 +124,7 @@ function gameLoop(timestamp) {
             gameOver();
         }
     }
-
+    drawlevelup();
     requestAnimationFrame(gameLoop);
 }
 
