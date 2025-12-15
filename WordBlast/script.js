@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const finalScoreElement = document.getElementById('final-score');
 const gameOverScreen = document.getElementById('game-over');
+const input_mob=document.getElementById('mobile-Input');
 
 
 canvas.width = 800;
@@ -70,23 +71,35 @@ function gameOver() {
     gameOverScreen.classList.remove('hidden');
 }
 
-
-window.addEventListener('keydown', (e) => {
+function handleInput(key) {
     if (isGameOver) return;
-
-    const key = e.key.toLowerCase();
-
-    for (let i = 0; i < enemies.length; i++) {
-        if (enemies[i].text[0] && enemies[i].text[0].toLowerCase() === key) {
-            enemies[i].text = enemies[i].text.slice(1);
-
-            if (enemies[i].text === "") {
-                enemies.splice(i, 1);
-                score += 10;
-                scoreElement.innerText = score;
+    key=key.toLowerCase();
+    for ( i=0; i<enemies.length;i++){
+        if (enemies[i].text[0]?.toLowerCase()===key) {
+            enemies[i].text=enemies[i].text.slice(1);
+            if (enemies[i].text===""){
+                enemies.splice(i,1);
+                score+=10;
+                scoreElement.innerText=score;
             }
             break;
         }
+    }
+}
+
+window.addEventListener('keydown', (e) => {
+    handleInput(e.key);
+});
+
+canvas.addEventListener('touchstart', () => {
+    mobileInput.focus();
+});
+
+mobileInput.addEventListener('input', () => {
+    const value=mobileInput.value;
+    if (value.length>0) {
+        handleInput(value[value.length-1]);
+        mobileInput.value="";
     }
 });
 
