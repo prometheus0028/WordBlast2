@@ -18,7 +18,20 @@ let lastSpawnTime = 0;
 const wordList = [
     "code", "bug", "fix", "git", "push", "pull", "merge", 
     "java", "node", "html", "css", "react", "vue", "data",
-    "loop", "if", "else", "var", "let", "const", "array"
+    "loop", "if", "else", "var", "let", "const", "array",
+    "function", "object", "class", "method", "scope", "return",
+    "string", "number", "boolean", "switch", "event", "listener",
+    "react", "vue", "script", "style", "json", "api", "promise",
+    "commit", "merge", "branch", "clone", "debug",
+     "asynchronous", "synchronous", "polymorphism", "encapsulation",
+    "inheritance", "abstraction", "multithreading", "concurrency",
+    "serialization", "deserialization", "authentication",
+    "authorization", "cryptography", "virtualization",
+    "microservices", "containerization", "orchestration",
+    "middleware", "architecture", "optimization",
+    "recursion", "backtracking", "memoization",
+    "normalization", "denormalization",
+    "dependency", "immutability", "responsiveness",
 ];
 
 
